@@ -8,6 +8,6 @@ public class FirstController {
 
     @GetMapping("/")
     public String HelloWord() {
-        return "Testing a get method in Java test";
+        return "Testing a get method in Java TESTING";
     }
 }
