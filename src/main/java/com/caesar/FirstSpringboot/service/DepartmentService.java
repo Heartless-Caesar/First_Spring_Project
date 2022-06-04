@@ -12,4 +12,6 @@ public interface DepartmentService {
     Department GetSingle(Long Id);
 
     void DeleteDept(Long departmentId);
+
+    Department UpdateDept(Long departmentId, Department obj);
 }

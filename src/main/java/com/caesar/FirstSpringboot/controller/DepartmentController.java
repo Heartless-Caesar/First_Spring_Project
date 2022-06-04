@@ -33,4 +33,9 @@ public class DepartmentController {
         departmentService.DeleteDept(departmentId);
         return "Deleted";
     }
+
+    @PutMapping("/api/single/{id}")
+    public Department UpdateDept(@PathVariable("id") Long departmentId, @RequestBody Department obj){
+        return departmentService.UpdateDept(departmentId,obj);
+    }
 }
