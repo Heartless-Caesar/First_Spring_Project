@@ -1,6 +1,7 @@
 package com.caesar.FirstSpringboot.controller;
 
 import com.caesar.FirstSpringboot.entity.Department;
+import com.caesar.FirstSpringboot.error.NotFoundError;
 import com.caesar.FirstSpringboot.service.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +34,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/api/single/{id}")
-    public Department GetSingle(@PathVariable("id") Long departmentId){
+    public Department GetSingle(@PathVariable("id") Long departmentId) throws NotFoundError {
         return departmentService.GetSingle(departmentId);
     }
 

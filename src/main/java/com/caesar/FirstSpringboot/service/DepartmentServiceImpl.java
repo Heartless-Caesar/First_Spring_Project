@@ -1,12 +1,14 @@
 package com.caesar.FirstSpringboot.service;
 
 import com.caesar.FirstSpringboot.entity.Department;
+import com.caesar.FirstSpringboot.error.NotFoundError;
 import com.caesar.FirstSpringboot.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -25,8 +27,14 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     //"get" IS UTILIZED TO GET THE OPTIONAL ELEMENT, OPTIONAL DUE TO IT POSSIBLY NOT EXISTING
     @Override
-    public Department GetSingle(Long departmentId) {
-        return departmentRepository.findById(departmentId).get();
+    public Department GetSingle(Long departmentId) throws NotFoundError {
+        Optional<Department> dept = departmentRepository.findById(departmentId);
+
+        if(!dept.isPresent()){
+            throw new NotFoundError("Department not available");
+        }
+
+        return dept.get();
     }
 
     @Override
