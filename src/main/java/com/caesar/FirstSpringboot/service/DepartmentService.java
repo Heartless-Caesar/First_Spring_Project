@@ -8,4 +8,8 @@ public interface DepartmentService {
     Department AddDepartment(Department obj);
 
     List<Department> GetAll();
+
+    Department GetSingle(Long Id);
+
+    void DeleteDept(Long departmentId);
 }
