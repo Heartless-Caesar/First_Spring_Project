@@ -50,6 +50,6 @@ public class DepartmentServiceImpl implements DepartmentService {
             deptDb.setDepartmentCode(obj.getDepartmentCode());
         }
 
-        return deptDb;
+        return departmentRespository.save(deptDb);
     }
 }
