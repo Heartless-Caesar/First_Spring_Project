@@ -38,4 +38,9 @@ public class DepartmentController {
     public Department UpdateDept(@PathVariable("id") Long departmentId, @RequestBody Department obj){
         return departmentService.UpdateDept(departmentId,obj);
     }
+
+    @GetMapping("/api/single/{name}")
+    public Department fetchDeptByName(@PathVariable("name") String deptName){
+        return departmentService.fetchDeptByName(deptName);
+    }
 }
