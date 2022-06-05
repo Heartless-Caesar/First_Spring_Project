@@ -1,6 +1,6 @@
 package com.caesar.FirstSpringboot.error;
 
-public class NotFoundError extends Exception{
+public class NotFoundError extends Exception {
     public NotFoundError() {
         super();
     }

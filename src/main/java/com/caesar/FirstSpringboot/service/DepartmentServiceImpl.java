@@ -31,7 +31,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         Optional<Department> dept = departmentRepository.findById(departmentId);
 
         if(!dept.isPresent()){
-            throw new NotFoundError("Department not available");
+            throw new NotFoundError("Department not found");
         }
 
         return dept.get();
