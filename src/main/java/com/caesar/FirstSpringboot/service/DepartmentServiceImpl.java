@@ -30,7 +30,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Department GetSingle(Long departmentId) throws NotFoundError {
         Optional<Department> dept = departmentRepository.findById(departmentId);
 
-        if(!dept.isPresent()){
+        if(dept.isEmpty()){
             throw new NotFoundError("Department not found");
         }
 
