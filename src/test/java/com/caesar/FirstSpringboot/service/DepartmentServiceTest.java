@@ -3,6 +3,7 @@ package com.caesar.FirstSpringboot.service;
 import com.caesar.FirstSpringboot.entity.Department;
 import com.caesar.FirstSpringboot.repository.DepartmentRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,9 @@ class DepartmentServiceTest {
     }
 
     @Test
+    @DisplayName("Valid department name test")
     public void whenDeptNameValid_DeptShouldBeFound(){
-      String deptName = "CS";
+      String deptName = "SE";
       Department found = departmentService.findByDepartmentNameIgnoreCase(deptName);
 
       assertEquals(deptName,found.getDepartmentName());
