@@ -19,7 +19,7 @@ import javax.validation.constraints.NotBlank;
 public class Department {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long departmentId;
     @NotBlank(message = "Department name is required")
     private String departmentName;

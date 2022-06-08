@@ -13,8 +13,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class DepartmentRepositoryTest {
 
     @Autowired
-    private DepartmentRepository departmentRepository;
+    private DepartmentRepository deptRepo;
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private TestEntityManager entityManager;
 
@@ -22,16 +23,16 @@ class DepartmentRepositoryTest {
     void setUp() {
         Department department = Department.builder()
                 .departmentName("EEG")
-                .departmentAddress("Flower")
-                .departmentCode("0-4")
+                .departmentCode("0-22")
+                .departmentAddress("Aus")
                 .build();
 
         entityManager.persist(department);
     }
 
     @Test
-    public void WhenFindById_ReturnDepartment(){
-       Department department = departmentRepository.findById(1L).get();
-       assertEquals(department.getDepartmentName(),"EEG");
+    public void whenValidId_ReturnDept(){
+      Department department = deptRepo.findById(1L).get();
+      assertEquals(department.getDepartmentName(),"EEG");
     }
 }
