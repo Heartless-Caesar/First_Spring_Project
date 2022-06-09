@@ -10,12 +10,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(DepartmentController.class)
 class DepartmentControllerTest {
@@ -25,12 +24,14 @@ class DepartmentControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    private Department department;
+
     @MockBean
     private DepartmentService departmentService;
 
     @BeforeEach
     void setUp(){
-        Department department = Department.builder()
+        department = Department.builder()
                 .departmentId(1L)
                 .departmentName("FSX")
                 .departmentCode("0-11")
@@ -56,10 +57,22 @@ class DepartmentControllerTest {
                         "\t\"departmentName\":\"FSX\",\n" +
                         "\t\"departmentCode\":\"0-11\",\n" +
                         "\t\"departmentAddress\":\"Galaxy-65\"\n" +
-                        "}")).andExpect(status().isOk());
+                        "}"))
+                .andExpect(status().isOk());
     }
 
     @Test
-    void getSingle() {
+    void getSingle() throws Exception {
+
+        Mockito.when(departmentService.GetSingle(1L))
+                .thenReturn(department);
+
+        mockMvc.perform(get("/api/single/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.departmentName")
+                        .value(department.getDepartmentName()))
+        ;
     }
 }
