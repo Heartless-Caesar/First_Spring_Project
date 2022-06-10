@@ -17,3 +17,9 @@ spring:
     activate:
       on-profile: dev
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
